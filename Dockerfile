@@ -1,12 +1,8 @@
 FROM node:22.13-alpine AS base
 
-FROM base AS deps
-WORKDIR /app
-COPY package.json package-lock.json* ./
-RUN npm ci
-
 FROM base AS builder
 WORKDIR /app
+ENV NODE_ENV=development
 COPY package.json package-lock.json* ./
 RUN npm ci
 COPY . .
