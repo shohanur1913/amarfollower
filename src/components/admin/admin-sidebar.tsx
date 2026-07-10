@@ -406,7 +406,7 @@ export function AdminSidebarContent({
     : SIDEBAR_WIDTH;
 
   return (
-    <div className="min-h-screen bg-background overflow-x-hidden">
+    <div className="min-h-screen bg-background">
       <header className="bg-card border-b border-border sticky top-0 z-40">
         <div className="flex h-16 items-center justify-between px-4 lg:px-6">
           <div className="flex items-center gap-3">
@@ -546,7 +546,7 @@ export function AdminSidebarContent({
 
       <div className="flex">
         <aside
-          className="hidden lg:block bg-card border-r border-border min-h-[calc(100vh-64px)] overflow-y-auto overflow-x-hidden transition-all duration-300 ease-in-out"
+          className="hidden lg:block bg-card border-r border-border sticky top-16 h-[calc(100vh-64px)] overflow-y-auto overflow-x-hidden transition-all duration-300 ease-in-out"
           style={{ width: sidebarWidth }}
         >
           <div className="py-2">
@@ -586,7 +586,7 @@ export function AdminSidebarContent({
           )}
         </aside>
 
-        <main className="flex-1 p-6 lg:p-8 overflow-x-hidden overflow-y-auto h-[calc(100vh-64px)]">{children}</main>
+        <main className="flex-1 p-6 lg:p-8 overflow-x-hidden">{children}</main>
       </div>
     </div>
   );

@@ -46,3 +46,30 @@ next-env.d.ts
 nul
 NUL
 Nul
+
+# Old PHP codebase
+old_version/
+
+# Internal tool plans
+.zcode/
+
+# Debug/test scripts
+_check_logs.cjs
+_send_test.mjs
+_test_smtp.mjs
+check-icons.js
+check-users.mjs
+temp_check2.mjs
+tmp_settings.tsv
+
+# AI agent files
+AGENTS.md
+CLAUDE.md
+APPINTERFACE.md
+
+# Migration scripts (reference only)
+migrate.mjs
+migrate.php
+
+# Prisma reset script
+prisma/reset-passwords.ts
