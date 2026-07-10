@@ -1,0 +1,10 @@
+[22-Apr-2026 05:22:44 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Data too long for column 'name' at row 1 in /home/amarfollower/public_html/admin/api/import_actions.php:23
+Stack trace:
+#0 /home/amarfollower/public_html/admin/api/import_actions.php(23): mysqli_query(Object(mysqli), 'INSERT INTO cat...')
+#1 {main}
+  thrown in /home/amarfollower/public_html/admin/api/import_actions.php on line 23
+[24-Jun-2026 08:57:37 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Data too long for column 'name' at row 1 in /home/amarfollower/public_html/admin/api/import_actions.php:23
+Stack trace:
+#0 /home/amarfollower/public_html/admin/api/import_actions.php(23): mysqli_query(Object(mysqli), 'INSERT INTO cat...')
+#1 {main}
+  thrown in /home/amarfollower/public_html/admin/api/import_actions.php on line 23
