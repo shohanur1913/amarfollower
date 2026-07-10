@@ -6,6 +6,8 @@ import { Toaster } from "@/components/sonner-provider";
 import { ThemeUpdater } from "@/components/theme-updater";
 import { prisma } from "@/lib/prisma";
 
+export const dynamic = "force-dynamic";
+
 const nunito = Nunito({
   variable: "--font-nunito",
   subsets: ["latin"],
@@ -13,16 +15,11 @@ const nunito = Nunito({
 });
 
 export async function generateMetadata(): Promise<Metadata> {
-  let faviconUrl: string | undefined;
   try {
     const setting = await prisma.setting.findUnique({ where: { key: "favicon_url" } });
-    if (setting?.value) faviconUrl = setting.value;
+    if (setting?.value) return { title: "AmarFollower", description: "Social Media Marketing Panel", icons: { icon: setting.value } };
   } catch {}
-  return {
-    title: "AmarFollower",
-    description: "Social Media Marketing Panel",
-    icons: faviconUrl ? { icon: faviconUrl } : undefined,
-  };
+  return { title: "AmarFollower", description: "Social Media Marketing Panel" };
 }
 
 export default function RootLayout({
