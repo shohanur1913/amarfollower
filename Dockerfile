@@ -2,6 +2,8 @@ FROM node:22.13-alpine AS base
 
 FROM base AS builder
 WORKDIR /app
+# Override Coolify's NODE_ENV=production so devDependencies are installed
+ARG NODE_ENV=development
 ENV NODE_ENV=development
 COPY package.json package-lock.json* ./
 RUN npm ci
