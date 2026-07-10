@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Nunito } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/components/providers";
-import { Toaster } from "sonner";
+import { Toaster } from "@/components/sonner-provider";
 import { ThemeUpdater } from "@/components/theme-updater";
 import { prisma } from "@/lib/prisma";
 
