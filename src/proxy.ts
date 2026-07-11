@@ -65,7 +65,7 @@ export async function proxy(request: NextRequest) {
   }
 
   // Public paths — no auth required
-  const publicPaths = ["/", "/login", "/register", "/forgot-password", "/reset-password", "/2fa", "/docs"];
+  const publicPaths = ["/", "/login", "/register", "/forgot-password", "/reset-password", "/2fa", "/docs", "/status"];
   if (publicPaths.some((p) => path === p || path.startsWith(p + "/"))) {
     return NextResponse.next();
   }
