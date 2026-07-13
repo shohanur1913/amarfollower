@@ -23,6 +23,13 @@ COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package.json ./package.json
+COPY --from=builder /app/prisma ./prisma
+COPY --from=builder /app/src/generated ./src/generated
+
+RUN mkdir -p /app/.next/cache/images && chown -R nextjs:nodejs /app/.next
+
+COPY start.sh /app/start.sh
+RUN chmod +x /app/start.sh
 
 USER nextjs
 
@@ -30,4 +37,4 @@ EXPOSE 3000
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 
-CMD ["npm", "start"]
+CMD ["/app/start.sh"]
