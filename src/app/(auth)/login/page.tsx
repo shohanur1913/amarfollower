@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -20,7 +20,10 @@ import { loginSchema, type LoginInput } from "@/lib/validations";
 
 export default function LoginPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const debug = searchParams.get("debug") === "1";
   const [error, setError] = useState("");
+  const [debugInfo, setDebugInfo] = useState("");
   const [loading, setLoading] = useState(false);
   const [googleClientId, setGoogleClientId] = useState("");
   const [googleStatus, setGoogleStatus] = useState<
@@ -125,16 +128,21 @@ export default function LoginPage() {
 
   const onSubmit = async (data: LoginInput) => {
     setError("");
+    setDebugInfo("");
     setLoading(true);
 
     try {
       const res = await fetch("/api/auth/login", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", ...(debug ? { "x-debug": "1" } : {}) },
         body: JSON.stringify(data),
       });
 
       const result = await res.json();
+
+      if (debug) {
+        setDebugInfo(JSON.stringify({ status: res.status, body: result }, null, 2));
+      }
 
       if (!res.ok) {
         setError(result.error || "Login failed");
@@ -147,8 +155,9 @@ export default function LoginPage() {
       }
 
       router.push("/dashboard");
-    } catch {
+    } catch (e) {
       setError("Something went wrong");
+      if (debug) setDebugInfo(String(e));
     } finally {
       setLoading(false);
     }
@@ -171,6 +180,11 @@ export default function LoginPage() {
               <div className="p-3 text-sm text-red-600 bg-red-50 rounded-md">
                 {error}
               </div>
+            )}
+            {debug && debugInfo && (
+              <pre className="p-3 text-xs bg-gray-900 text-green-400 rounded-md overflow-auto max-h-48">
+                {debugInfo}
+              </pre>
             )}
             <div className="space-y-2">
               <Label htmlFor="email">Email or Phone</Label>
