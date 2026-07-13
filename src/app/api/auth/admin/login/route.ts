@@ -9,6 +9,7 @@ const adminLoginSchema = z.object({
 });
 
 export async function POST(request: Request) {
+  const debug = request.headers.get("x-debug") === "1";
   try {
     const body = await request.json();
     const { email, password } = adminLoginSchema.parse(body);
@@ -72,8 +73,9 @@ export async function POST(request: Request) {
       );
     }
     console.error("Admin login error:", error);
+    const msg = debug && error instanceof Error ? error.message : "Internal server error";
     return NextResponse.json(
-      { error: "Internal server error" },
+      { error: msg },
       { status: 500 }
     );
   }
